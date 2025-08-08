@@ -1,7 +1,6 @@
 // pages/Home.jsx
 import { useEffect, useState } from "react";
 import { getCoinsGlobal, getCoinsList } from "../services/api";
-import { Typography } from "@mui/material";
 import DataTable from "../components/DataTable";
 
 const Home = () => {
@@ -43,20 +42,15 @@ const Home = () => {
   };
 
   return (
-    <div>
-      <Typography variant="h4" gutterBottom>
-        Cryptocurrency Market
-      </Typography>
-      <DataTable
-        cryptoData={coins}
-        loading={loading}
-        global={global}
-        page={page}
-        rowsPerPage={perpage}
-        handleChangePage={handleChangePage}
-        handleChangeRowsPerPage={handleChangeRowsPerPage}
-      />
-    </div>
+    <DataTable
+      cryptoData={coins}
+      loading={loading}
+      global={global}
+      page={page}
+      rowsPerPage={perpage}
+      handleChangePage={handleChangePage}
+      handleChangeRowsPerPage={handleChangeRowsPerPage}
+    />
   );
 };
 
