@@ -78,7 +78,7 @@ function EnhancedTableHead({ order, orderBy, onRequestSort }) {
 
 function EnhancedTableToolbar() {
   return (
-    <Toolbar sx={{pr: 1, '&.MuiToolbar-root': { pl: 0 } }}>
+    <Toolbar sx={{ pr: 1, "&.MuiToolbar-root": { pl: 0 } }}>
       <Typography
         sx={{ flex: "1 1 100%" }}
         variant="h5"
@@ -131,22 +131,33 @@ export default function DataTable({
                 Array.from({ length: rowsPerPage }).map((_, index) => (
                   <TableRow key={index}>
                     <TableCell>
-                      <Skeleton variant="circular" width={25} height={25} />
+                      <Box
+                        sx={{ display: "flex", alignItems: "center", gap: 1 }}
+                      >
+                        <Skeleton variant="circular" width={25} height={25} />
+                        <Skeleton width="100px" />
+                        <Skeleton width="100px" />
+                      </Box>
                     </TableCell>
                     <TableCell>
-                      <Skeleton width="100px" />
+                      <Box display="flex" justifyContent="flex-end">
+                        <Skeleton width="60px" />
+                      </Box>
                     </TableCell>
                     <TableCell>
-                      <Skeleton width="60px" />
+                      <Box display="flex" justifyContent="flex-end">
+                        <Skeleton width="80px" />
+                      </Box>
                     </TableCell>
-                    <TableCell align="right">
-                      <Skeleton width="80px" />
+                    <TableCell>
+                      <Box display="flex" justifyContent="flex-end">
+                        <Skeleton width="100px" />
+                      </Box>
                     </TableCell>
-                    <TableCell align="right">
-                      <Skeleton width="100px" />
-                    </TableCell>
-                    <TableCell align="right">
-                      <Skeleton width="60px" />
+                    <TableCell>
+                      <Box display="flex" justifyContent="flex-end">
+                        <Skeleton width="60px" />
+                      </Box>
                     </TableCell>
                   </TableRow>
                 ))
