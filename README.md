@@ -1,4 +1,4 @@
-# Nimo test application
+# Run Crypto Market Prices application
 
 To run application, follow the simple the following steps:
 
