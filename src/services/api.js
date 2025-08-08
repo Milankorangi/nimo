@@ -1,6 +1,5 @@
 import axios from 'axios';
-
-const BASE_URL = 'https://api.coingecko.com/api/v3';
+import { BASE_URL } from '../utils/constants';
 
 export const getCoinsList = (per_page, page) => axios.get(`${BASE_URL}/coins/markets`, {
   params: {

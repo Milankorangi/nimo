@@ -16,6 +16,7 @@ import {
 } from "@mui/material";
 import { visuallyHidden } from "@mui/utils";
 import { useNavigate } from "react-router-dom";
+import { ROWS_PER_PAGE_OPTIONS } from "../utils/constants";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) return -1;
@@ -31,11 +32,10 @@ function getComparator(order, orderBy) {
 
 function EnhancedTableHead({ order, orderBy, onRequestSort }) {
   const headCells = [
-    { id: "image", numeric: false, label: "" },
-    { id: "name", numeric: false, label: "Name" },
-    { id: "symbol", numeric: false, label: "Symbol" },
+    { id: "name", numeric: false, label: "Coin" },
     { id: "current_price", numeric: true, label: "Price ($)" },
     { id: "market_cap", numeric: true, label: "Market Cap ($)" },
+    { id: "max_supply", numeric: true, label: "Max Supply" },
     {
       id: "price_change_percentage_24h",
       numeric: true,
@@ -57,6 +57,7 @@ function EnhancedTableHead({ order, orderBy, onRequestSort }) {
             sortDirection={orderBy === headCell.id ? order : false}
           >
             <TableSortLabel
+              sx={{ color: "#000", fontWeight: "700" }}
               active={orderBy === headCell.id}
               direction={orderBy === headCell.id ? order : "asc"}
               onClick={createSortHandler(headCell.id)}
@@ -77,10 +78,10 @@ function EnhancedTableHead({ order, orderBy, onRequestSort }) {
 
 function EnhancedTableToolbar() {
   return (
-    <Toolbar sx={{ pl: 2, pr: 1 }}>
+    <Toolbar sx={{pr: 1, '&.MuiToolbar-root': { pl: 0 } }}>
       <Typography
         sx={{ flex: "1 1 100%" }}
-        variant="h6"
+        variant="h5"
         id="tableTitle"
         component="div"
       >
@@ -116,7 +117,7 @@ export default function DataTable({
 
   return (
     <Box sx={{ width: "100%", padding: 2 }}>
-      <Paper sx={{ width: "100%", mb: 2 }}>
+      <Paper sx={{ width: "100%", mb: 2, boxShadow: "none" }}>
         <EnhancedTableToolbar />
         <TableContainer>
           <Table sx={{ minWidth: 750 }} aria-labelledby="tableTitle">
@@ -158,20 +159,36 @@ export default function DataTable({
                     onClick={() => navigate(`/coins/${coin.id}`)}
                   >
                     <TableCell>
-                      <img
-                        src={coin.image}
-                        alt={coin.name}
-                        width="25"
-                        height="25"
-                      />
+                      <Box
+                        sx={{ display: "flex", alignItems: "center", gap: 1 }}
+                      >
+                        <img
+                          src={coin.image}
+                          alt={coin.name}
+                          width="25"
+                          height="25"
+                        />
+                        <Typography variant="body2" sx={{ fontWeight: 500 }}>
+                          {coin.name}
+                        </Typography>
+                        <Typography
+                          variant="body2"
+                          sx={{ color: "#808080", marginLeft: 1 }}
+                        >
+                          {coin.symbol.toUpperCase()}
+                        </Typography>
+                      </Box>
                     </TableCell>
-                    <TableCell>{coin.name}</TableCell>
-                    <TableCell>{coin.symbol.toUpperCase()}</TableCell>
                     <TableCell align="right">
                       ${coin.current_price.toLocaleString()}
                     </TableCell>
                     <TableCell align="right">
                       ${coin.market_cap.toLocaleString()}
+                    </TableCell>
+                    <TableCell align="right">
+                      {coin?.max_supply
+                        ? coin?.max_supply.toLocaleString()
+                        : "Not avil.."}
                     </TableCell>
                     <TableCell
                       align="right"
@@ -203,7 +220,7 @@ export default function DataTable({
             page={page}
             onPageChange={handleChangePage}
             rowsPerPage={rowsPerPage}
-            rowsPerPageOptions={[50, 100, 200, 300]}
+            rowsPerPageOptions={ROWS_PER_PAGE_OPTIONS}
             onRowsPerPageChange={handleChangeRowsPerPage}
           />
         )}
