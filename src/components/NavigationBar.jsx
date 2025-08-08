@@ -1,4 +1,5 @@
 import { AppBar, Toolbar, Box } from "@mui/material";
+import logo from "../assets/logo.svg";
 
 export default function CustomToolbar() {
   return (
@@ -20,11 +21,7 @@ export default function CustomToolbar() {
         }}
       >
         <Box sx={{ display: "flex", alignItems: "center", flexGrow: 1 }}>
-          <img
-            src="src/assets/logo.svg"
-            alt="Logo"
-            style={{ height: 40, marginRight: 10 }}
-          />
+          <img src={logo} alt="Logo" style={{ height: 40, marginRight: 10 }} />
         </Box>
       </Toolbar>
     </AppBar>
