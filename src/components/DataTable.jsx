@@ -191,14 +191,14 @@ export default function DataTable({
                       </Box>
                     </TableCell>
                     <TableCell align="right">
-                      ${coin.current_price.toLocaleString()}
+                      ${coin?.current_price?.toLocaleString()}
                     </TableCell>
                     <TableCell align="right">
-                      ${coin.market_cap.toLocaleString()}
+                      ${coin?.market_cap?.toLocaleString()}
                     </TableCell>
                     <TableCell align="right">
                       {coin?.max_supply
-                        ? coin?.max_supply.toLocaleString()
+                        ? coin?.max_supply?.toLocaleString()
                         : "Not avil.."}
                     </TableCell>
                     <TableCell
@@ -227,7 +227,7 @@ export default function DataTable({
         {cryptoData.length > 0 && (
           <TablePagination
             component="div"
-            count={global.data?.active_cryptocurrencies || 0}
+            count={global?.active_cryptocurrencies || 0}
             page={page}
             onPageChange={handleChangePage}
             rowsPerPage={rowsPerPage}
