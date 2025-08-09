@@ -14,7 +14,7 @@ const Home = () => {
   useEffect(() => {
     getCoinsGlobal()
       .then((response) => {
-        setGlobal(response.data);
+        setGlobal(response?.data?.data);
       })
       .catch((error) => {
         console.error("Failed to fetch global data:", error);
